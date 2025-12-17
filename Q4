@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int N = 5;
+    char grid[5][5];
+    for (int i = 0; i < N; i++)
+        for (int j = 0; j < N; j++)
+            cin >> grid[i][j];
+
+    int horizontal = 0, vertical = 0, maxLen = 0;
+
+    for (int i = 0; i < N; i++) {
+        int len = 0;
+        for (int j = 0; j < N; j++) {
+            if (grid[i][j] != '#') len++;
+            else { if (len >= 3) horizontal++; if (len > maxLen) maxLen = len; len = 0; }
+        }
+        if (len >= 3) horizontal++;
+        if (len > maxLen) maxLen = len;
+    }
+
+    for (int j = 0; j < N; j++) {
+        int len = 0;
+        for (int i = 0; i < N; i++) {
+            if (grid[i][j] != '#') len++;
+            else { if (len >= 3) vertical++; if (len > maxLen) maxLen = len; len = 0; }
+        }
+        if (len >= 3) vertical++;
+        if (len > maxLen) maxLen = len;
+    }
+
+    cout << horizontal << " " << vertical << " " << maxLen << endl;
+    return 0;
+}
