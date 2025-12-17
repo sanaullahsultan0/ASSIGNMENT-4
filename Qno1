@@ -1,0 +1,71 @@
+#include <iostream>
+using namespace std;
+
+ const int DAYS = 7;
+ const int TIMES = 4;
+
+
+void inputTemperature(float temp[DAYS][TIMES]) {
+    for (int i = 0; i < DAYS; i++) {
+        cout << "Enter 4 temperatures for Day " << i + 1 << ": ";
+        for (int j = 0; j < TIMES; j++) {
+            cin >> temp[i][j];
+        }
+    }
+}
+
+
+void findHighLow(float temp[DAYS][TIMES], float &highest, float &lowest) {
+    highest = temp[0][0];
+    lowest = temp[0][0];
+
+    for (int i = 0; i < DAYS; i++) {
+        for (int j = 0; j < TIMES; j++) {
+            if (temp[i][j] > highest) {
+                highest = temp[i][j];
+            }
+            if (temp[i][j] < lowest) {
+                lowest = temp[i][j];
+            }
+        }
+    }
+}
+
+void calculateAverage(float temp[DAYS][TIMES], float avg[DAYS]) {
+    for (int i = 0; i < DAYS; i++) {
+        avg[i] = 0;
+        for (int j = 0; j < TIMES; j++) {
+            avg[i] = avg[i] + temp[i][j];
+        }
+        avg[i] = avg[i] / TIMES;
+    }
+}
+
+
+void displayResult(float temp[DAYS][TIMES], float avg[DAYS], float highest, float lowest) {
+    cout << "\nDay\tT1\tT2\tT3\tT4\tAverage\n";
+
+    for (int i = 0; i < DAYS; i++) {
+        cout << i + 1 << "\t";
+        for (int j = 0; j < TIMES; j++) {
+            cout << temp[i][j] << "\t";
+        }
+        cout << avg[i] << endl;
+    }
+
+    cout << "\nHighest Temperature of the Week: " << highest << endl;
+    cout << "Lowest Temperature of the Week : " << lowest << endl;
+}
+
+int main() {
+    float temperature[DAYS][TIMES];
+    float average[DAYS];
+    float highest, lowest;
+
+    inputTemperature(temperature);
+    findHighLow(temperature, highest, lowest);
+    calculateAverage(temperature, average);
+    displayResult(temperature, average, highest, lowest);
+
+    return 0;
+}
