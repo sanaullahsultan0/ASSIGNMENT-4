@@ -1,0 +1,19 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> a = {1, 2, 3, 4, 5};
+    vector<int> b = {1, 2, 4, 5};
+
+    int sum1 = 0, sum2 = 0;
+
+    for (int x : a)
+        sum1 += x;
+
+    for (int x : b)
+        sum2 += x;
+
+    cout << sum1 - sum2;
+    return 0;
+}
