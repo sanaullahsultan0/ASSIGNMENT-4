@@ -1,0 +1,71 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+struct Student {
+    string name;
+    int id;
+};
+
+struct Course {
+    string courseName;
+    string courseCode;
+    vector<Student> students;
+};
+
+int main() {
+    int courseCount;
+    cout << "Enter number of courses: ";
+    cin >> courseCount;
+
+    vector<Course> courses;
+
+    for (int i = 0; i < courseCount; i++) {
+        Course c;
+        int studentCount;
+
+        cout << "\nCourse " << i + 1 << endl;
+
+        cout << "Enter course name: ";
+        cin.ignore();
+        getline(cin, c.courseName);
+
+        cout << "Enter course code: ";
+        getline(cin, c.courseCode);
+
+        cout << "Enter number of students enrolled: ";
+        cin >> studentCount;
+
+        cin.ignore();
+        for (int j = 0; j < studentCount; j++) {
+            Student s;
+
+            cout << "Student " << j + 1 << " name: ";
+            getline(cin, s.name);
+
+            cout << "Student ID: ";
+            cin >> s.id;
+            cin.ignore();
+
+            c.students.push_back(s);
+        }
+
+        courses.push_back(c);
+    }
+
+    cout << "\n----- Course Enrollment Details -----\n";
+
+    for (int i = 0; i < courses.size(); i++) {
+        cout << "\nCourse Name: " << courses[i].courseName << endl;
+        cout << "Course Code: " << courses[i].courseCode << endl;
+        cout << "Enrolled Students:\n";
+
+        for (int j = 0; j < courses[i].students.size(); j++) {
+            cout << "  Name: " << courses[i].students[j].name
+                 << ", ID: " << courses[i].students[j].id << endl;
+        }
+    }
+
+    return 0;
+}
