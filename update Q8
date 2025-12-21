@@ -1,0 +1,63 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+struct Employee {
+    string name;
+    int age;
+    vector<string> skills;
+};
+
+int main() {
+    int n;
+    cout << "Enter number of employees: "<<endl;
+    cin >> n;
+
+    vector<Employee> employees;
+
+    for (int i = 0; i < n; i++) {
+        Employee emp;
+        int skillCount;
+
+        cout << "\nEmployee " << i + 1 << endl;
+
+        cout << "Enter name: ";
+        cin.ignore();
+        getline(cin, emp.name);
+
+        cout << "Enter age: ";
+        cin >> emp.age;
+
+        cout << "Enter number of skills: ";
+        cin >> skillCount;
+
+        cin.ignore();
+        for (int j = 0; j < skillCount; j++) {
+            string skill;
+            cout << "Enter skill " << j + 1 << ": ";
+            getline(cin, skill);
+            emp.skills.push_back(skill);
+        }
+
+        employees.push_back(emp);
+    }
+
+    cout << "\n--- Employee Details ---\n";
+
+    for (int i = 0; i < employees.size(); i++) {
+        cout << "\nEmployee " << i + 1 << endl;
+        cout << "Name: " << employees[i].name << endl;
+        cout << "Age: " << employees[i].age << endl;
+        cout << "Skills: ";
+
+        for (int j = 0; j < employees[i].skills.size(); j++) {
+            cout << employees[i].skills[j];
+            if (j != employees[i].skills.size() - 1)
+                cout << ", ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
